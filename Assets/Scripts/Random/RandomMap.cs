@@ -119,7 +119,7 @@ public class RandomMap : MonoBehaviour
 				SpawnFloor();
 			else if (rand >= floor && rand < maxRandomCount - down - trap)
 			{
-				SpawnRapmDown();
+					SpawnRapmDown(flag);
 				SpawnBackgroundRandom();
 
 				if (flag)
@@ -130,7 +130,7 @@ public class RandomMap : MonoBehaviour
 			}
 			else if (rand >= floor + up && rand < maxRandomCount - trap)
 			{
-				SpawnRampUp();
+				SpawnRampUp(flag);
 				SpawnBackgroundRandom();
 
 				if (flag)
@@ -170,18 +170,22 @@ public class RandomMap : MonoBehaviour
 		SpawnObject(barrel, chanceBarrel);
 	}
 
-	private void SpawnRapmDown()
+	private void SpawnRapmDown(bool flag)
 	{
 		FillUnderFloor(-1);
 		y++;
 		GameObject obj = Instantiate(oneRampDown, new Vector3(x, y, 0), Quaternion.identity);
+		if (!flag)
+			obj.transform.eulerAngles = new Vector3(obj.transform.eulerAngles.x, obj.transform.eulerAngles.y, obj.transform.eulerAngles.z - 90);
 		obj.transform.parent = globalStatic.transform;
 	}
 
-	private void SpawnRampUp()
+	private void SpawnRampUp(bool flag)
 	{
 		FillUnderFloor(0);
 		GameObject obj = Instantiate(oneRampUp, new Vector3(x, y, 0), Quaternion.identity);
+		if (!flag)
+			obj.transform.eulerAngles = new Vector3(obj.transform.eulerAngles.x, obj.transform.eulerAngles.y, obj.transform.eulerAngles.z + 90);
 		obj.transform.parent = globalStatic.transform;
 		y--;
 	}
