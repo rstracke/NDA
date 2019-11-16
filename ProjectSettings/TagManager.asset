@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Fire
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - PostProcessing
+  - Player
+  - Traps
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 631450373
+    locked: 0
+  - name: Traps
+    uniqueID: 3530705855
+    locked: 0
+  - name: Interractable1
+    uniqueID: 489948123
+    locked: 0
+  - name: Interractable2
+    uniqueID: 898356989
+    locked: 0
+  - name: Player
+    uniqueID: 2333874687
+    locked: 0
+  - name: Foreground
+    uniqueID: 2934235191
+    locked: 0
