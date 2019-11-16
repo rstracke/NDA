@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ClampUI : MonoBehaviour
 {
     public Text capture;
-
+    public Image img;
     private Vector2 uiPos;
     // Start is called before the first frame update
     void Start()
@@ -21,6 +21,12 @@ public class ClampUI : MonoBehaviour
         {
             uiPos = Camera.main.WorldToScreenPoint(transform.position);
             capture.transform.position = uiPos;
+        }
+          
+        if (capture != null)
+        {
+            uiPos = Camera.main.WorldToScreenPoint(transform.position);
+            img.transform.position = uiPos;
         }
     }
 }

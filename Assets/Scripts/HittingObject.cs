@@ -8,7 +8,6 @@ public class HittingObject : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        Debug.Log(other.tag);
         if (other.tag == "Damagable")
         {
             other.GetComponent<DamagableObject>().health -= hitDamage;
