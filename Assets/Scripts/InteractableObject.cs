@@ -7,7 +7,6 @@ public class InteractableObject : MonoBehaviour
 {
     public GameObject player;
     public GameObject UI;
-    public Action OnPlayerClose_Action;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,19 +19,21 @@ public class InteractableObject : MonoBehaviour
         
         if (Vector2.Distance(transform.position, player.transform.position) < 1.2f)
         {
-            if (UI != null) 
-                UI.SetActive(true);
+             UIController.Singleton.ShowInteractionTip(true);
+             if (Input.GetKeyDown(KeyCode.E))
+                UIController.Singleton.ShowInteractionWheel(true);
+             else if (Input.GetKeyUp(KeyCode.E))
+                UIController.Singleton.ShowInteractionWheel(false);
+  
         }
         else
         {
-            if (UI != null) 
-                UI.SetActive(false);
+            UIController.Singleton.ShowInteractionTip(false);
         }
     }
 
     private void OnDestroy()
     {
-        if (UI != null) 
-            UI.SetActive(false);
+        UIController.Singleton.ShowInteractionTip(false);
     }
 }
