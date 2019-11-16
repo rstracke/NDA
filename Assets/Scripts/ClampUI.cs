@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ClampUI : MonoBehaviour
 {
-    public Button button;
+    public Text capture;
 
     private Vector2 uiPos;
     // Start is called before the first frame update
@@ -17,10 +17,10 @@ public class ClampUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (button != null)
+        if (capture != null)
         {
             uiPos = Camera.main.WorldToScreenPoint(transform.position);
-            button.transform.position = uiPos;
+            capture.transform.position = uiPos;
         }
     }
 }

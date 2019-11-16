@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitableObject : MonoBehaviour
+public class HittingObject : MonoBehaviour
 {
     public float hitDamage;
 
     private void OnTriggerStay2D(Collider2D other)
     {
         Debug.Log(other.tag);
-        if (other.tag == "damagable")
+        if (other.tag == "Damagable")
         {
             other.GetComponent<DamagableObject>().health -= hitDamage;
         }

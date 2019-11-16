@@ -23,6 +23,11 @@ public class InteractableObject : MonoBehaviour
             if (UI != null) 
                 UI.SetActive(true);
         }
+        else
+        {
+            if (UI != null) 
+                UI.SetActive(false);
+        }
     }
 
     private void OnDestroy()

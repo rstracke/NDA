@@ -9,10 +9,7 @@ public class DamagableObject : MonoBehaviour
     public float health = 100f;
     private void OnCollisionStay2D(Collision2D other)
     {
-        if (other.collider.tag == "damagable")
-        {
-            health -= other.collider.GetComponent<HitableObject>().hitDamage;
-        }
+
     }
 
     // Start is called before the first frame update
