@@ -112,8 +112,14 @@ public class RandomMap : MonoBehaviour
 			SpawnBackgroundRandom();
 			FillUnderFloor(0);
 		}
+		count = flag ? start_x + 10 : start_x - 10; 
+		Generate(flag, count, increment);
 
-		count = flag ? start_x + 100 : start_x - 100;
+	}
+
+	private void Generate(bool flag, int count, int increment)
+	{
+		count = flag ? x + count : x - count;
 		for (; flag ? x < count : x > count; x += increment)
 		{
 			int rand = Random.Range(0, maxRandomCount);
@@ -121,7 +127,7 @@ public class RandomMap : MonoBehaviour
 				SpawnFloor();
 			else if (rand >= floor && rand < maxRandomCount - down - trap)
 			{
-					SpawnRapmDown(flag);
+				SpawnRapmDown(flag);
 				SpawnBackgroundRandom();
 
 				if (flag)
@@ -160,6 +166,7 @@ public class RandomMap : MonoBehaviour
 				FillUnderFloor(1);
 			}
 			SpawnBackgroundRandom();
+			RandomLights();
 		}
 	}
 
@@ -281,6 +288,12 @@ public class RandomMap : MonoBehaviour
 		}
 	}
 
+	private void RandomLights()
+	{
+		if (GetComponent<RandomProps>())
+			GetComponent<RandomProps>().CreateLight(x, y + 3);
+	}
+
 	#endregion
 
 	#region Destroy AllMap
@@ -295,6 +308,7 @@ public class RandomMap : MonoBehaviour
 
 	private void ReloadMap(bool flag)
 	{
+		flag2 = flag;
 		player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
 		if (flag)
 		{
@@ -318,6 +332,16 @@ public class RandomMap : MonoBehaviour
 		generateMap = false;
 	}
 
+	private void ContinueMap(bool flag)
+	{
+		if (flag && player.transform.position.x + 10 >= x)
+			Generate(flag, 10, 1);
+		else if (!flag && player.transform.position.x - 10 <= x)
+			Generate(flag, 10, -1);
+	}
+
+	bool flag2;
+
 	[Header("Генерация новой карты")]
 	public bool generateMap;
 	private void Update()
@@ -338,5 +362,6 @@ public class RandomMap : MonoBehaviour
 				ReloadMap(false);
 			}
 		}
+		ContinueMap(flag2);
 	}
 }
