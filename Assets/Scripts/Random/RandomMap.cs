@@ -403,6 +403,13 @@ public class RandomMap : MonoBehaviour
 		if (TIMER > 10)
 			holyWWar = true;
 
+		if (holyWWar && GetComponent<RandomEnemy>())
+		{
+			GetComponent<RandomEnemy>().Apocalipsis(x, y);
+			holyWWar = false;
+			TIMER = 0;
+		}
+
 		if (ForwardRandomMap == "right")
 		{
 			player_check_pos = player.transform.position.x;
