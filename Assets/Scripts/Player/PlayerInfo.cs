@@ -16,4 +16,9 @@ public class PlayerInfo : MonoBehaviour
 			HP = 100;
 		}
 	}
+
+	private void Attack()
+	{
+
+	}
 }

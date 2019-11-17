@@ -7,8 +7,10 @@ public class BulletLaser : MonoBehaviour
 	private GameObject player;
 	private Rigidbody2D rb;
 	private Vector3 vector;
+	private float timer;
 	private void Start()
 	{
+		timer = 5;
 		player = LocalPlayer.Singleton.player;
 		rb = GetComponent<Rigidbody2D>();
 		vector = player.transform.position - transform.position;
@@ -19,6 +21,9 @@ public class BulletLaser : MonoBehaviour
 
 	private void Update()
 	{
+		timer -= Time.deltaTime;
+		if (timer < 0)
+			Destroy(gameObject);
 		for (; vector.magnitude < 10;)
 			vector *= 2;
 		for (; vector.magnitude > 10;)
