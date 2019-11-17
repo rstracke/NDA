@@ -378,7 +378,6 @@ public class RandomMap : MonoBehaviour
 			}
 		}
 		flag2 = flag;
-		Debug.Log("persona + " + player.transform.position);
 
 
 		player.GetComponent<Rigidbody2D>().isKinematic = true;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Kislota : MonoBehaviour
 {
-	private void OnCollisionStay(Collision collision)
+	private void OnTriggerStay2D(Collider2D collision)
 	{
 		if (collision.gameObject.GetComponent<EnemyFollow>())
 			collision.gameObject.GetComponent<EnemyFollow>().HP -= 0.1f;

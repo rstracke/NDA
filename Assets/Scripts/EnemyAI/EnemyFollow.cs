@@ -23,10 +23,11 @@ class EnemyFollow : MonoBehaviour
 	GameObject player;
 	Rigidbody2D rb;
 	public float speedMove;
-	public float HP;
+	public float HP = 1;
 	public float minDamage, maxDamage;
 	public float minPoints, maxPoints;
 
+	public bool stat;
 	void Start()
 	{
 		player = LocalPlayer.Singleton.player;
@@ -36,14 +37,17 @@ class EnemyFollow : MonoBehaviour
 	float speed;
 	void Update()
 	{
-		Follow();
-		Fire();
-
 		if (HP <= 0)
 		{
 			LocalPlayer.Singleton.points += Random.Range(minPoints, maxPoints);
 			Destroy(gameObject);
 		}
+		if (stat)
+			return;
+		Follow();
+		Fire();
+
+
 		//transform.GetChild(0).gameObject.GetComponent<Animator>().Play("SolderDie");
 
 	}

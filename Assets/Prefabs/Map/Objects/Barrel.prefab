@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 4423291773680890890}
   - component: {fileID: 4423291773680890889}
   - component: {fileID: 4423291773680890888}
+  - component: {fileID: 8162942808234061777}
   m_Layer: 0
   m_Name: Barrel
   m_TagString: Damagable
@@ -189,6 +190,29 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.69140625, y: 0.9296875}
   m_EdgeRadius: 0
+--- !u!114 &8162942808234061777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4423291773680890895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1b628fc1414d4bfa928352f5115725b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedMove: 0
+  HP: 30
+  minDamage: 0
+  maxDamage: 0
+  minPoints: 0
+  maxPoints: 0
+  stat: 1
+  delay: 0
+  newDelay: 0
+  bullet: {fileID: 0}
+  target: 0
 --- !u!1 &4423291774545031228
 GameObject:
   m_ObjectHideFlags: 0
