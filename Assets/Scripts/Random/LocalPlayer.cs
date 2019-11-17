@@ -5,6 +5,7 @@ using UnityEngine;
 public class LocalPlayer : MonoBehaviour
 {
 	public GameObject player;
+	public bool Trader;
 
 	public static LocalPlayer Singleton;
 
