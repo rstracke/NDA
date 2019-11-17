@@ -9,7 +9,6 @@ public class Hit : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other.tag);
         if (other.tag == "Hitting")
         {
             Debug.Log("Hitting");

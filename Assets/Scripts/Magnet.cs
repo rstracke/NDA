@@ -66,5 +66,32 @@ public class Magnet : MonoBehaviour
                 isHold = true;
             }
         }
-    }
+
+		if (LocalPlayer.Singleton.player.transform.parent != null)
+		{
+			if(Input.anyKeyDown)
+			{
+				vitjanerealisovalfichy++;
+			}
+		}
+
+		if (vitjanerealisovalfichy >= 10)
+		{
+			GameObject player = LocalPlayer.Singleton.player;
+			player.transform.parent = null;
+			player.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+			player.GetComponent<Rigidbody2D>().simulated = true;
+			player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+			player.GetComponent<PlatformerCharacter2D>().enabled = true;
+			player.GetComponent<Platformer2DUserControl>().enabled = true;
+			player.GetComponent<Animator>().enabled = true;
+			vitjanerealisovalfichy = 0;
+			Destroy(transform.GetChild(0).gameObject);
+			Destroy(this);
+		}
+
+	}
+
+	float vitjanerealisovalfichy;
+	float timer;
 }

@@ -64,7 +64,8 @@ class EnemyFollow : MonoBehaviour
 		delay -= Time.deltaTime;
 		if (delay < 0)
 		{
-			Instantiate(bullet, transform.position, Quaternion.identity);
+			GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+			newBullet.name = "Bullet";
 			delay = newDelay;
 		}
 	}
