@@ -58,10 +58,10 @@ public class RandomMap : MonoBehaviour
 
 		maxRandomCount = floor + up + down + trap;
 		if (ForwardRandomMap == "right")
-			MapRandom(true);
+			ReloadMap(true);
 		else
-			MapRandom(false);
-    }
+			ReloadMap(false);
+	}
 
 	int x, y;
 
