@@ -346,11 +346,11 @@ MonoBehaviour:
   floorDown: 4
   up: 10
   down: 10
-  trap: 0
+  trap: 5
   trapMaxWight: 5
   start_x: 0
   start_y: 0
-  generateMap: 1
+  generateMap: 0
 --- !u!1 &434881151
 GameObject:
   m_ObjectHideFlags: 0
