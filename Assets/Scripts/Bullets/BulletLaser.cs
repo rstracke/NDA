@@ -17,6 +17,10 @@ public class BulletLaser : MonoBehaviour
 		//transform.LookAt(LocalPlayer.Singleton.player.transform.position);
 		transform.right = player.transform.position - transform.position;
 		transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z + 90);
+
+
+		for (; vector.magnitude < 50;)
+			vector *= 2;
 	}
 
 	private void Update()
@@ -24,10 +28,7 @@ public class BulletLaser : MonoBehaviour
 		timer -= Time.deltaTime;
 		if (timer < 0)
 			Destroy(gameObject);
-		for (; vector.magnitude < 10;)
-			vector *= 2;
-		for (; vector.magnitude > 10;)
-			vector /= 2;
+
 		rb.velocity = vector;
 	}
 

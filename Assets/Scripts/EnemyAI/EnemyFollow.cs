@@ -36,13 +36,27 @@ class EnemyFollow : MonoBehaviour
 	{
 		Follow();
 		Fire();
+
+		if (HP <= 0)
+		{
+			Destroy(gameObject);
+		}
+		//transform.GetChild(0).gameObject.GetComponent<Animator>().Play("SolderDie");
+
 	}
 
 	public float delay, newDelay;
 	public GameObject bullet;
-
+	public bool target;
 	private void Follow()
 	{
+		if ((player.transform.position - transform.position).magnitude > 8)
+		{
+			target = false;
+			return;
+		}
+		else
+			target = true;
 		if (transform.position.x < LocalPlayer.Singleton.player.transform.position.x)
 		{
 			transform.eulerAngles = new Vector3(transform.eulerAngles.x, 0, transform.transform.eulerAngles.z);
@@ -62,7 +76,7 @@ class EnemyFollow : MonoBehaviour
 	private void Fire()
 	{
 		delay -= Time.deltaTime;
-		if (delay < 0)
+		if (delay < 0 && target)
 		{
 			GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
 			newBullet.name = "Bullet";
