@@ -224,6 +224,8 @@ public class RandomMap : MonoBehaviour
 		GameObject obj = Instantiate(oneFloor, new Vector3(x, y, 0), Quaternion.identity);
 		obj.transform.parent = globalStatic.transform;
 		SpawnObject(barrel, chanceBarrel);
+		if (GetComponent<RandomEnemy>())
+			GetComponent<RandomEnemy>().SpawnEnemy(x, y);
 	}
 
 	private void SpawnRapmDown(bool flag)
