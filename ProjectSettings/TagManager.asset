@@ -9,6 +9,7 @@ TagManager:
   - Damagable
   - Magnet
   - Ground
+  - Magnetable
   layers:
   - Default
   - TransparentFX
