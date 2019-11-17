@@ -14,12 +14,12 @@ public class Magnet : MonoBehaviour
     public float initialForce = 100;
     
 
-    public bool isHold;
+    public bool isHold = false;
     
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Magnetable")
+        if (other.tag == "Magnetable" && !isHold)
         {
             objectMagnetPoint = other.transform.gameObject;
             magnetableObject = other.transform.parent.gameObject;
@@ -63,13 +63,6 @@ public class Magnet : MonoBehaviour
             }
             if (Vector2.Distance(myMagnetPoint.transform.position, objectMagnetPoint.transform.position) < 0.1f)
             {
-                _Rigidbody2D.simulated = false;
-                if (magnetableObject.tag == "Player")
-                {
-                    magnetableObject.GetComponent<PlatformerCharacter2D>().enabled = false;
-                    magnetableObject.GetComponent<Platformer2DUserControl>().enabled = false;
-                }
-                magnetableObject.transform.SetParent(transform);
                 isHold = true;
             }
         }
