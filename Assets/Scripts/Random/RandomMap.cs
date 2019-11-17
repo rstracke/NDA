@@ -24,6 +24,9 @@ public class RandomMap : MonoBehaviour
 	public GameObject barrel;
 	public int chanceBarrel;
 
+	public GameObject rail;
+	public GameObject railPanel;
+
 	[Header("Коллекция заднего фона")]
 	public GameObject[] background;
 	public GameObject[] fillFloor;
@@ -41,10 +44,12 @@ public class RandomMap : MonoBehaviour
 
 	public int trap;
 	public int trapMaxWight;
+	public int trapMinWight;
 
 	private int maxRandomCount;
 
 	public int start_x, start_y;
+	public int startWightMap;
 	GameObject[] statics = new GameObject[6];
 
 	void Start()
@@ -112,14 +117,15 @@ public class RandomMap : MonoBehaviour
 			SpawnBackgroundRandom();
 			FillUnderFloor(0);
 		}
-		count = flag ? start_x + 10 : start_x - 10; 
+		count = flag ? start_x + startWightMap : start_x - startWightMap; 
 		Generate(flag, count, increment);
 
 	}
 
 	private void Generate(bool flag, int count, int increment)
 	{
-		count = flag ? x + count : x - count;
+		//count = flag ? x + count : x - count;
+		count += x;
 		for (; flag ? x < count : x > count; x += increment)
 		{
 			int rand = Random.Range(0, maxRandomCount);
@@ -149,6 +155,9 @@ public class RandomMap : MonoBehaviour
 			}
 			else if (rand >= maxRandomCount - trap && rand < maxRandomCount)
 			{
+				int count2 = Random.Range(trapMinWight, trapMaxWight);
+				if (count2 == 3)
+					CreateRail(flag);
 				SpawnBoard(flag);
 				FillUnderFloor(1);
 				SpawnBackgroundRandom();
@@ -156,7 +165,7 @@ public class RandomMap : MonoBehaviour
 					x++;
 				else
 					x--;
-				SpawnTrap(flag);
+				SpawnTrap(flag, count2);
 				//SpawnBackgroundRandom();
 				if (flag)
 					x++;
@@ -168,6 +177,39 @@ public class RandomMap : MonoBehaviour
 			SpawnBackgroundRandom();
 			RandomLights(flag);
 		}
+	}
+
+	public void CreateRail(bool flag)
+	{
+		if (flag)
+		{
+			GameObject obj = Instantiate(rail, new Vector3(x + 3, y + 5, 0), Quaternion.identity);
+			obj.transform.parent = globalStatic.transform;
+			obj = Instantiate(railPanel, new Vector3(x + 1, y + 1, 0), Quaternion.identity);
+			obj.transform.parent = globalStatic.transform;
+			for (int i = 0; i < 6; i++)
+			{
+				SpawnFloor();
+				SpawnBackgroundRandom();
+				x++;
+			}
+		}
+		else
+		{
+			GameObject obj = Instantiate(rail, new Vector3(x - 3, y + 5, 0), Quaternion.identity);
+			obj.transform.parent = globalStatic.transform;
+			obj = Instantiate(railPanel, new Vector3(x - 1, y + 1, 0), Quaternion.identity);
+			obj.transform.parent = globalStatic.transform; 
+			for (int i = 0; i < 6; i++)
+			{
+				SpawnFloor();
+				SpawnBackgroundRandom();
+				x--;
+			}
+		}
+
+
+
 	}
 
 	#region Spawn static Tiles
@@ -199,11 +241,10 @@ public class RandomMap : MonoBehaviour
 		y--;
 	}
 
-	private void SpawnTrap(bool flag)
+	private void SpawnTrap(bool flag, int count)
 	{
 		if (trapMaxWight <= 0)
 			trapMaxWight = 1;
-		int count = Random.Range(1, trapMaxWight);
 		for (int i = 0; i < count; i++)
 		{
 			SpawnBackgroundRandom();
