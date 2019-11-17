@@ -44,6 +44,7 @@ public class RandomMap : MonoBehaviour
 
 	private int maxRandomCount;
 
+	public int start_x, start_y;
 	GameObject[] statics = new GameObject[6];
 
 	void Start()
@@ -62,20 +63,20 @@ public class RandomMap : MonoBehaviour
 			MapRandom(false);
     }
 
-	public float start_x, start_y;
 	int x, y;
 
 	private void MapRandom(bool flag)
 	{
-		x = y = 0;
+		x = (int)start_x;
+		y = (int)start_y;
 		if (flag)
 		{
-			x = -1;
+			x = start_x - 1;
 			FillUnderFloor(-1);
 			SpawnBackgroundRandom();
 			for (int i = 0; i < 2; i++)
 				SpawnWallLeft(-i - 1);
-			y = 3;
+			y = start_y + 3;
 			SpawnBoard(true);
 			for (int i = 0; i < 5; i++)
 			{
@@ -86,12 +87,12 @@ public class RandomMap : MonoBehaviour
 		}
 		else
 		{
-			x = 1;
+			x = start_x + 1;
 			FillUnderFloor(-1);
 			SpawnBackgroundRandom();
 			for (int i = 0; i < 2; i++)
 				SpawnWallRight(-i - 1);
-			y = 3;
+			y = start_y + 3;
 			SpawnBoard(false);
 			for (int i = 0; i < 5; i++)
 			{
@@ -100,8 +101,9 @@ public class RandomMap : MonoBehaviour
 				SpawnBackgroundRandom();
 			}
 		}
-		x = y = 0;
-		int count = flag ? 5 : -5;
+		x = (int)start_x;
+		y = (int)start_y;
+		int count = flag ? start_x + 5 : start_x - 5;
 		int increment = flag ? 1 : -1;
 		for (;flag ? x < count : x > count; x += increment)
 		{
@@ -111,7 +113,7 @@ public class RandomMap : MonoBehaviour
 			FillUnderFloor(0);
 		}
 
-		count = flag ? 100 : -100;
+		count = flag ? start_x + 100 : start_x - 100;
 		for (; flag ? x < count : x > count; x += increment)
 		{
 			int rand = Random.Range(0, maxRandomCount);
@@ -141,20 +143,20 @@ public class RandomMap : MonoBehaviour
 			}
 			else if (rand >= maxRandomCount - trap && rand < maxRandomCount)
 			{
-				SpawnBoard(true);
+				SpawnBoard(flag);
 				FillUnderFloor(1);
 				SpawnBackgroundRandom();
 				if (flag)
 					x++;
 				else
 					x--;
-				SpawnTrap();
-				SpawnBackgroundRandom();
+				SpawnTrap(flag);
+				//SpawnBackgroundRandom();
 				if (flag)
 					x++;
 				else
 					x--;
-				SpawnBoard(false);
+				SpawnBoard(!flag);
 				FillUnderFloor(1);
 			}
 			SpawnBackgroundRandom();
@@ -190,7 +192,7 @@ public class RandomMap : MonoBehaviour
 		y--;
 	}
 
-	private void SpawnTrap()
+	private void SpawnTrap(bool flag)
 	{
 		if (trapMaxWight <= 0)
 			trapMaxWight = 1;
@@ -208,7 +210,12 @@ public class RandomMap : MonoBehaviour
 			obj = Instantiate(oneFloor, new Vector3(x, y - 2, 0), Quaternion.identity);
 			obj.transform.parent = globalStatic.transform;
 			if (i + 1 < count)
-				x++;
+			{
+				if (flag)
+					x++;
+				else
+					x--;
+			}
 		}
 	}
 
@@ -286,22 +293,50 @@ public class RandomMap : MonoBehaviour
 	}
 	#endregion
 
+	private void ReloadMap(bool flag)
+	{
+		player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
+		if (flag)
+		{
+			start_x = (int)player.transform.position.x - 3;
+			start_y = (int)player.transform.position.y - 2;
+		}
+		else
+		{
+			start_x = (int)player.transform.position.x + 3;
+			start_y = (int)player.transform.position.y - 2;
+		}
+
+		player.GetComponent<Rigidbody2D>().isKinematic = true;
+		player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+		DestroyMap();
+		if (ForwardRandomMap == "right")
+			MapRandom(true);
+		else
+			MapRandom(false);
+		player.GetComponent<Rigidbody2D>().isKinematic = false;
+		generateMap = false;
+	}
+
 	[Header("Генерация новой карты")]
 	public bool generateMap;
 	private void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.R) || generateMap)
+		if (Input.GetAxis("Horizontal") > 0)
 		{
-			player.transform.position = new Vector3(0, 5, 0);
-			player.GetComponent<Rigidbody2D>().isKinematic = true;
-			player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-			DestroyMap();
-			if (ForwardRandomMap == "right")
-				MapRandom(true);
-			else
-				MapRandom(false);
-			player.GetComponent<Rigidbody2D>().isKinematic = false;
-			generateMap = false;
+			if (ForwardRandomMap != "right")
+			{
+				ForwardRandomMap = "right";
+				ReloadMap(true);
+			}
+		}
+		if (Input.GetAxis("Horizontal") < 0)
+		{
+			if (ForwardRandomMap != "left")
+			{
+				ForwardRandomMap = "left";
+				ReloadMap(false);
+			}
 		}
 	}
 }
