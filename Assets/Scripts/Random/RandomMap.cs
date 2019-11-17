@@ -224,6 +224,8 @@ public class RandomMap : MonoBehaviour
 		GameObject obj = Instantiate(oneFloor, new Vector3(x, y, 0), Quaternion.identity);
 		obj.transform.parent = globalStatic.transform;
 		SpawnObject(barrel, chanceBarrel);
+		if (GetComponent<RandomEnemy>())
+			GetComponent<RandomEnemy>().SpawnEnemy(x, y);
 	}
 
 	private void SpawnRapmDown(bool flag)
@@ -392,20 +394,15 @@ public class RandomMap : MonoBehaviour
 	public bool generateMap;
 	public float player_pos_x = 0;
 	public float player_check_pos = 0;
+	[Header("Enemy Rash")]
+	public float TIMER;
+	public bool holyWWar;
 	private void Update()
 	{
-		/*
-		if (player_pos_x + 10 <  && ForwardRandomMap != "right")
-		{
-			ForwardRandomMap = "right";
-			ReloadMap(true);
-		}
-		if (ForwardRandomMap != "left")
-		{
-			ForwardRandomMap = "left";
-			ReloadMap(false);
-		}
-			*/
+		TIMER += Time.deltaTime;
+		if (TIMER > 10)
+			holyWWar = true;
+
 		if (ForwardRandomMap == "right")
 		{
 			player_check_pos = player.transform.position.x;
@@ -416,6 +413,7 @@ public class RandomMap : MonoBehaviour
 				ForwardRandomMap = "left";
 				ReloadMap(false);
 				flag2 = false;
+				holyWWar = false;
 			}
 		}
 		else
@@ -428,6 +426,7 @@ public class RandomMap : MonoBehaviour
 				ForwardRandomMap = "right";
 				ReloadMap(true);
 				flag2 = true;
+				holyWWar = false;
 			}
 		}
 

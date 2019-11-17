@@ -1,18 +1,37 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class InteractionController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static InteractionController Singleton;
+
+    public UnityAction<GameObject> OnMagnet_Action;
+
+    public Action<GameObject> OnSwitchInteract_Action;
+
+    private void Awake()
+    {
+        if (Singleton == null)
+        { 
+            Singleton = this;
+        } 
+        else if(Singleton == this)
+        { 
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnEnable()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDestroy()
     {
-        
+        OnMagnet_Action = null;
+        OnSwitchInteract_Action = null;
     }
 }
