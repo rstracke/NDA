@@ -19,6 +19,4 @@ public class RandomProps : MonoBehaviour
 			obj.transform.parent = GetComponent<RandomMap>().globalStatic.transform;
 		}
 	}
-
-
 }

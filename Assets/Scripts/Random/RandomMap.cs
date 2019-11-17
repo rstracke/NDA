@@ -49,6 +49,7 @@ public class RandomMap : MonoBehaviour
 	private int maxRandomCount;
 
 	public int start_x, start_y;
+	public int startWightMap;
 	GameObject[] statics = new GameObject[6];
 
 	void Start()
@@ -116,14 +117,15 @@ public class RandomMap : MonoBehaviour
 			SpawnBackgroundRandom();
 			FillUnderFloor(0);
 		}
-		count = flag ? start_x + 10 : start_x - 10; 
+		count = flag ? start_x + startWightMap : start_x - startWightMap; 
 		Generate(flag, count, increment);
 
 	}
 
 	private void Generate(bool flag, int count, int increment)
 	{
-		count = flag ? x + count : x - count;
+		//count = flag ? x + count : x - count;
+		count += x;
 		for (; flag ? x < count : x > count; x += increment)
 		{
 			int rand = Random.Range(0, maxRandomCount);
@@ -180,19 +182,32 @@ public class RandomMap : MonoBehaviour
 	public void CreateRail(bool flag)
 	{
 		if (flag)
-			for (int i = 0; i < 5; i++)
+		{
+			GameObject obj = Instantiate(rail, new Vector3(x + 3, y + 5, 0), Quaternion.identity);
+			obj.transform.parent = globalStatic.transform;
+			obj = Instantiate(railPanel, new Vector3(x + 1, y + 1, 0), Quaternion.identity);
+			obj.transform.parent = globalStatic.transform;
+			for (int i = 0; i < 6; i++)
 			{
 				SpawnFloor();
 				SpawnBackgroundRandom();
 				x++;
 			}
+		}
 		else
-			for (int i = 0; i < 5; i++)
+		{
+			GameObject obj = Instantiate(rail, new Vector3(x - 3, y + 5, 0), Quaternion.identity);
+			obj.transform.parent = globalStatic.transform;
+			obj = Instantiate(railPanel, new Vector3(x - 1, y + 1, 0), Quaternion.identity);
+			obj.transform.parent = globalStatic.transform; 
+			for (int i = 0; i < 6; i++)
 			{
 				SpawnFloor();
 				SpawnBackgroundRandom();
 				x--;
 			}
+		}
+
 
 
 	}
