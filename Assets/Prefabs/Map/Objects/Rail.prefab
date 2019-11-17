@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3527870808826312016}
   - component: {fileID: 3527870808826312017}
   - component: {fileID: 3527870808826312019}
+  - component: {fileID: 7942149696699180519}
   m_Layer: 0
   m_Name: Crane
   m_TagString: Magnet
@@ -27,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3527870808826312012}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.194, z: 0}
+  m_LocalPosition: {x: -1.03, y: 0.194, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3527870809711829638}
@@ -114,7 +115,24 @@ MonoBehaviour:
   magnetableObject: {fileID: 0}
   objectMagnetPoint: {fileID: 0}
   myMagnetPoint: {fileID: 3527870809711829639}
-  magneted: 0
+  initialForce: 100
+  isHold: 0
+--- !u!111 &7942149696699180519
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3527870808826312012}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: b16165086802447829d67f96760c5db0, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: b16165086802447829d67f96760c5db0, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &3527870808890314110
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,6 +143,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3527870808890314108}
   - component: {fileID: 3527870808890314109}
+  - component: {fileID: 7829076331582111999}
   m_Layer: 0
   m_Name: Rail
   m_TagString: Untagged
@@ -195,6 +214,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!111 &7829076331582111999
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3527870808890314110}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: b16165086802447829d67f96760c5db0, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &3527870809711829639
 GameObject:
   m_ObjectHideFlags: 0
