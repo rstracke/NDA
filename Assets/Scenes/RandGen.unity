@@ -346,7 +346,7 @@ MonoBehaviour:
   floorDown: 4
   up: 10
   down: 10
-  trap: 5
+  trap: 30
   trapMaxWight: 5
   start_x: 0
   start_y: 0
