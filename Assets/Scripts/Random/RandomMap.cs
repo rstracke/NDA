@@ -124,8 +124,13 @@ public class RandomMap : MonoBehaviour
 
 	private void Generate(bool flag, int count, int increment)
 	{
+		Debug.Log("Generate " + flag);
 		//count = flag ? x + count : x - count;
-		count += x;
+		if (flag)
+			count += x;
+		else
+			count = x - count;
+
 		for (; flag ? x < count : x > count; x += increment)
 		{
 			int rand = Random.Range(0, maxRandomCount);
