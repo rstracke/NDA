@@ -7,6 +7,7 @@ public class RandomProps : MonoBehaviour
 	public GameObject[] lights;
 	public int lightsChance;
 	private int lightsPositionCheck;
+
 	public void CreateLight(int x, int y, bool flag)
 	{
 		if ((flag && lightsPositionCheck + 3 > x) || (!flag && lightsPositionCheck - 3 < x))
@@ -18,4 +19,6 @@ public class RandomProps : MonoBehaviour
 			obj.transform.parent = GetComponent<RandomMap>().globalStatic.transform;
 		}
 	}
+
+
 }

@@ -24,6 +24,9 @@ public class RandomMap : MonoBehaviour
 	public GameObject barrel;
 	public int chanceBarrel;
 
+	public GameObject rail;
+	public GameObject railPanel;
+
 	[Header("Коллекция заднего фона")]
 	public GameObject[] background;
 	public GameObject[] fillFloor;
@@ -41,6 +44,7 @@ public class RandomMap : MonoBehaviour
 
 	public int trap;
 	public int trapMaxWight;
+	public int trapMinWight;
 
 	private int maxRandomCount;
 
@@ -149,6 +153,9 @@ public class RandomMap : MonoBehaviour
 			}
 			else if (rand >= maxRandomCount - trap && rand < maxRandomCount)
 			{
+				int count2 = Random.Range(trapMinWight, trapMaxWight);
+				if (count2 == 3)
+					CreateRail(flag);
 				SpawnBoard(flag);
 				FillUnderFloor(1);
 				SpawnBackgroundRandom();
@@ -156,7 +163,7 @@ public class RandomMap : MonoBehaviour
 					x++;
 				else
 					x--;
-				SpawnTrap(flag);
+				SpawnTrap(flag, count2);
 				//SpawnBackgroundRandom();
 				if (flag)
 					x++;
@@ -168,6 +175,26 @@ public class RandomMap : MonoBehaviour
 			SpawnBackgroundRandom();
 			RandomLights(flag);
 		}
+	}
+
+	public void CreateRail(bool flag)
+	{
+		if (flag)
+			for (int i = 0; i < 5; i++)
+			{
+				SpawnFloor();
+				SpawnBackgroundRandom();
+				x++;
+			}
+		else
+			for (int i = 0; i < 5; i++)
+			{
+				SpawnFloor();
+				SpawnBackgroundRandom();
+				x--;
+			}
+
+
 	}
 
 	#region Spawn static Tiles
@@ -199,11 +226,10 @@ public class RandomMap : MonoBehaviour
 		y--;
 	}
 
-	private void SpawnTrap(bool flag)
+	private void SpawnTrap(bool flag, int count)
 	{
 		if (trapMaxWight <= 0)
 			trapMaxWight = 1;
-		int count = Random.Range(1, trapMaxWight);
 		for (int i = 0; i < count; i++)
 		{
 			SpawnBackgroundRandom();
