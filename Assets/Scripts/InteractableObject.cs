@@ -18,30 +18,30 @@ public class InteractableObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if (Vector2.Distance(transform.position, player.transform.position) < 1.2f)
+        if (Vector2.Distance(transform.position, player.transform.position) < 1.0f)
         {
-            if (!uiShown)
-                PlayerController.Singleton.OnPlayerNearInteractable_Action?.Invoke(true);
+            PlayerController.Singleton.OnPlayerNearInteractable_Action?.Invoke(transform.GetChild(0).gameObject, true);
             if (Input.GetKeyDown(KeyCode.E))
             {
-                PlayerController.Singleton.OnPlayerInterraction_Action?.Invoke(true);
-                uiShown = true;
+                PlayerController.Singleton.OnPlayerInterraction_Action?.Invoke(transform.GetChild(0).gameObject, true);
+                Debug.Log("[" + gameObject.name + " " +  Vector2.Distance(transform.position, player.transform.position) + "]");
             }
             else if (Input.GetKeyUp(KeyCode.E))
             {
-                PlayerController.Singleton.OnPlayerInterraction_Action?.Invoke(false);
+                PlayerController.Singleton.OnPlayerInterraction_Action?.Invoke(transform.GetChild(0).gameObject, false);
             }
 
         }
         else
         {
-            PlayerController.Singleton.OnPlayerNearInteractable_Action?.Invoke(false);
+            PlayerController.Singleton.OnPlayerNearInteractable_Action?.Invoke(transform.GetChild(0).gameObject, false);
+            uiShown = false;
         }
     }
 
     private void OnDestroy()
     {
-        PlayerController.Singleton.OnPlayerNearInteractable_Action?.Invoke(false);
+        PlayerController.Singleton.OnPlayerNearInteractable_Action?.Invoke(transform.GetChild(0).gameObject, false);
+        uiShown = false;
     }
 }
