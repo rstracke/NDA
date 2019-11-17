@@ -11,8 +11,11 @@ public class Magnet : MonoBehaviour
     public GameObject objectMagnetPoint;
     public GameObject myMagnetPoint;
     private Rigidbody2D _Rigidbody2D;
+    public float initialForce = 100;
+    
 
-    public bool magneted;
+    public bool isHold;
+    
     
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -21,6 +24,8 @@ public class Magnet : MonoBehaviour
             objectMagnetPoint = other.transform.gameObject;
             magnetableObject = other.transform.parent.gameObject;
             _Rigidbody2D = magnetableObject.GetComponent<Rigidbody2D>();
+            /*Debug.Log(InteractionController.Singleton);
+            InteractionController.Singleton.OnMagnet_Action?.Invoke(transform.gameObject);*/
             isObjectInField = true;
         }
     }
@@ -35,6 +40,12 @@ public class Magnet : MonoBehaviour
     }
 
     // Start is called before the first frame update
+    private void OnEnable()
+    {
+        objectMagnetPoint = null;
+        magnetableObject = null;
+    }
+
     void Start()
     {
         
@@ -43,26 +54,24 @@ public class Magnet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!magneted)
+        if (!isHold && magnetableObject && objectMagnetPoint)
         {
-            if (isObjectInField && magnetableObject && objectMagnetPoint)
+            float dist = Vector2.Distance(myMagnetPoint.transform.position, objectMagnetPoint.transform.position);
+            if (isObjectInField)
             {
+                _Rigidbody2D.AddForce(initialForce/(dist* dist)  * (myMagnetPoint.transform.position - objectMagnetPoint.transform.position));
+            }
+            if (Vector2.Distance(myMagnetPoint.transform.position, objectMagnetPoint.transform.position) < 0.1f)
+            {
+                _Rigidbody2D.simulated = false;
                 if (magnetableObject.tag == "Player")
                 {
                     magnetableObject.GetComponent<PlatformerCharacter2D>().enabled = false;
                     magnetableObject.GetComponent<Platformer2DUserControl>().enabled = false;
-
                 }
-                _Rigidbody2D.AddForce(20 * (myMagnetPoint.transform.position - objectMagnetPoint.transform.position));
-            }
-            if (Vector2.Distance(myMagnetPoint.transform.position, objectMagnetPoint.transform.position) < 0.05f)
-            {
-                _Rigidbody2D.simulated = false;
                 magnetableObject.transform.SetParent(transform);
-                magneted = true;
+                isHold = true;
             }
-
-           
         }
     }
 }

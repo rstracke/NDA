@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 661761957604827727}
   - component: {fileID: 661761957604827712}
+  - component: {fileID: 5733773177259129749}
   m_Layer: 0
   m_Name: Magnetable
   m_TagString: Magnetable
@@ -57,6 +58,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6563549, y: 0.9140892}
   m_EdgeRadius: 0
+--- !u!114 &5733773177259129749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661761957604827726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a56d6e7b8a03244e1997a79d0be09c04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &661761958081800846
 GameObject:
   m_ObjectHideFlags: 0

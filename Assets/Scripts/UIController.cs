@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,9 +8,8 @@ public class UIController : MonoBehaviour
     public GameObject InteractionTip;
     public GameObject InteractionWheel;
     public static UIController Singleton {get; set;}
-    
-    // Start is called before the first frame update
-    void Start()
+
+    private void OnEnable()
     {
         if (Singleton == null)
         { 
@@ -19,6 +19,11 @@ public class UIController : MonoBehaviour
         { 
             Destroy(gameObject);
         }
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
         PlayerController.Singleton.OnPlayerNearInteractable_Action += ShowInteractionTip;
         PlayerController.Singleton.OnPlayerInterraction_Action += ShowInteractionWheel;
     }
