@@ -335,7 +335,7 @@ MonoBehaviour:
     type: 3}
   barrel: {fileID: 9174813047033693476, guid: c853ae754256e44bf9ad69f6933ef400, type: 3}
   chanceBarrel: 10
-  rail: {fileID: 1398134243842571495, guid: dc240b7ed58cc41d7a0a702a6dc058d1, type: 3}
+  rail: {fileID: 3527870808890314110, guid: dc240b7ed58cc41d7a0a702a6dc058d1, type: 3}
   railPanel: {fileID: 2367083488076900738, guid: d933c119b4f9f4152a627250e4a39ee7,
     type: 3}
   background:
@@ -346,17 +346,17 @@ MonoBehaviour:
   fillFloor:
   - {fileID: 3910661483854439485, guid: fd30669281a274a119e191a57697a801, type: 3}
   backgroundCount: 20
-  ForwardRandomMap: left
+  ForwardRandomMap: right
   floor: 30
   floorDown: 4
   up: 30
-  down: 15
-  trap: 5
+  down: 19
+  trap: 1
   trapMaxWight: 4
   trapMinWight: 3
   start_x: 0
   start_y: 0
-  startWightMap: 10
+  startWightMap: 1000
   generateMap: 0
 --- !u!114 &379541226
 MonoBehaviour:
@@ -380,11 +380,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 379541223}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85f3a7c9908444653bcc98656143ccf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trade: {fileID: 1203950805012050313, guid: 668810b50101e474ca31dc652d43ee94, type: 3}
   start_x: 20
   start_y: 0
 --- !u!1 &434881151

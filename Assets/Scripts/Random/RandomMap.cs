@@ -392,6 +392,7 @@ public class RandomMap : MonoBehaviour
 	public bool generateMap;
 	private void Update()
 	{
+        /*
 		if (Input.GetAxis("Horizontal") > 0)
 		{
 			if (ForwardRandomMap != "right")
@@ -408,6 +409,7 @@ public class RandomMap : MonoBehaviour
 				ReloadMap(false);
 			}
 		}
+		*/
 		ContinueMap(flag2);
 	}
 }
