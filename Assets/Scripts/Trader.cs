@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityStandardAssets._2D;
 
 public class Trader : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class Trader : MonoBehaviour
 		DisplayOff();
 	}
 
+	bool one;
+
 	private void Update()
 	{
 		if (trade)
@@ -35,13 +38,19 @@ public class Trader : MonoBehaviour
 			if (CanvasMagazin.activeSelf)
 			{
 				Debug.Log("покупка на один один");
-				if (Input.GetKeyDown(KeyCode.Alpha1))
+				if (Input.GetKeyDown(KeyCode.Alpha1) && !one)
 				{
 					Debug.Log("покупка на один");
 					if (LocalPlayer.Singleton.points < 5000)
 					{
 						CanvasText.GetComponent<FadeIn>().GetComponent<Text>().text = "Недостаточно средств";
 						CanvasText.GetComponent<FadeIn>().GetComponent<Text>().color = Color.yellow;
+					}
+					else
+					{
+						one = true;
+						LocalPlayer.Singleton.points -= 5000;
+						LocalPlayer.Singleton.GetComponent<RandomMap>().trap = 0;
 					}
 					//отключение магнитов
 				}
@@ -59,6 +68,9 @@ public class Trader : MonoBehaviour
 					}
 					else
 					{
+
+						LocalPlayer.Singleton.points -= 100;
+						LocalPlayer.Singleton.player.GetComponent<PlatformerCharacter2D>().m_MaxSpeed += 0.5f;
 						CanvasText.GetComponent<FadeIn>().GetComponent<Text>().text = "Продано, тому роботу который рядом";
 						CanvasText.GetComponent<FadeIn>().GetComponent<Text>().color = Color.yellow;
 					}
@@ -72,6 +84,27 @@ public class Trader : MonoBehaviour
 					}
 					else
 					{
+
+						LocalPlayer.Singleton.points -= 100;
+						LocalPlayer.Singleton.player.GetComponent<PlayerInfo>().HP += 10f;
+						LocalPlayer.Singleton.player.GetComponent<PlayerInfo>().SaveHP += 10f;
+						CanvasText.GetComponent<FadeIn>().GetComponent<Text>().text = "Продано";
+						CanvasText.GetComponent<FadeIn>().GetComponent<Text>().color = Color.yellow;
+					}
+				}
+
+				if (Input.GetKeyDown(KeyCode.Alpha5))
+				{
+					if (LocalPlayer.Singleton.points < 100)
+					{
+						CanvasText.GetComponent<FadeIn>().GetComponent<Text>().text = "Недостаточно средств";
+						CanvasText.GetComponent<FadeIn>().GetComponent<Text>().color = Color.yellow;
+					}
+					else
+					{
+
+						LocalPlayer.Singleton.points -= 100;
+						LocalPlayer.Singleton.player.GetComponent<PlayerInfo>().DAMAGE += 1f;
 						CanvasText.GetComponent<FadeIn>().GetComponent<Text>().text = "Продано";
 						CanvasText.GetComponent<FadeIn>().GetComponent<Text>().color = Color.yellow;
 					}

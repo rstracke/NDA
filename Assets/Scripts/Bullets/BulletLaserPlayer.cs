@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BulletLaserPlayer : MonoBehaviour
 {
-	float timer = 5;
+	float timer = 0.4f;
 	GameObject player;
 	Rigidbody2D rb;
 	Vector3 vector;
@@ -19,7 +19,7 @@ public class BulletLaserPlayer : MonoBehaviour
 		transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z + 90);
 
 
-		for (; vector.magnitude < 20;)
+		for (; vector.magnitude < 15;)
 			vector *= 2;
 	}
 

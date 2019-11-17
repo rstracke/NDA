@@ -148,6 +148,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedMove: 0.05
   HP: 100
+  minDamage: 5
+  maxDamage: 10
+  minPoints: 5
+  maxPoints: 15
   delay: 0
   newDelay: 1
   bullet: {fileID: 7179198237485410391, guid: 2bf6834d686ea4aefad5e1fb83c3c9c9, type: 3}

@@ -22,8 +22,10 @@ class EnemyFollow : MonoBehaviour
 {
 	GameObject player;
 	Rigidbody2D rb;
-	public float speedMove = 30.0f;
+	public float speedMove;
 	public float HP;
+	public float minDamage, maxDamage;
+	public float minPoints, maxPoints;
 
 	void Start()
 	{
@@ -39,6 +41,7 @@ class EnemyFollow : MonoBehaviour
 
 		if (HP <= 0)
 		{
+			LocalPlayer.Singleton.points += Random.Range(minPoints, maxPoints);
 			Destroy(gameObject);
 		}
 		//transform.GetChild(0).gameObject.GetComponent<Animator>().Play("SolderDie");
@@ -80,6 +83,7 @@ class EnemyFollow : MonoBehaviour
 		{
 			GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
 			newBullet.name = "Bullet";
+			newBullet.GetComponent<BulletLaser>().damage = Random.Range(minDamage, maxDamage);
 			delay = newDelay;
 		}
 	}

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerInfo : MonoBehaviour
 {
-	public float HP;
+	public float HP = 100;
+	public float SaveHP = 100;
 	public float DAMAGE;
 	public GameObject bullet;
 
@@ -15,7 +16,7 @@ public class PlayerInfo : MonoBehaviour
 			LocalPlayer.Singleton.GetComponent<RandomMap>().DestroyMap();
 			transform.position = Vector3.zero;
 			LocalPlayer.Singleton.Trader = true;
-			HP = 100;
+			HP = SaveHP;
 		}
 
 		Attack();

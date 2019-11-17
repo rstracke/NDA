@@ -64,9 +64,9 @@ public class RandomMap : MonoBehaviour
 
 		maxRandomCount = floor + up + down + trap;
 		if (ForwardRandomMap == "right")
-			ReloadMap(true);
+			ReloadMap(true, false, 0, 0);
 		else
-			ReloadMap(false);
+			ReloadMap(false, false, 0, 0);
 	}
 
 	int x, y;
@@ -357,20 +357,29 @@ public class RandomMap : MonoBehaviour
 	}
 	#endregion
 
-	public void ReloadMap(bool flag)
+	public void ReloadMap(bool flag, bool check, int x, int y)
 	{
-		flag2 = flag;
-		player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
-		if (flag)
+		if (check)
 		{
-			start_x = (int)player.transform.position.x - 3;
-			start_y = (int)player.transform.position.y - 2;
+			start_x = x;
+			start_y = y;
 		}
 		else
 		{
-			start_x = (int)player.transform.position.x + 3;
-			start_y = (int)player.transform.position.y - 2;
+			if (flag)
+			{
+				start_x = (int)player.transform.position.x - 3;
+				start_y = (int)player.transform.position.y - 2;
+			}
+			else
+			{
+				start_x = (int)player.transform.position.x + 3;
+				start_y = (int)player.transform.position.y - 2;
+			}
 		}
+		flag2 = flag;
+		Debug.Log("persona + " + player.transform.position);
+
 
 		player.GetComponent<Rigidbody2D>().isKinematic = true;
 		player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
@@ -400,6 +409,8 @@ public class RandomMap : MonoBehaviour
 	[Header("Enemy Rash")]
 	public float TIMER;
 	public bool holyWWar;
+
+	public int cicle;
 	private void Update()
 	{
 		if (LocalPlayer.Singleton.Trader)
@@ -414,7 +425,6 @@ public class RandomMap : MonoBehaviour
 			holyWWar = false;
 			TIMER = 0;
 		}
-
 		if (ForwardRandomMap == "right")
 		{
 			player_check_pos = player.transform.position.x;
@@ -423,9 +433,10 @@ public class RandomMap : MonoBehaviour
 			else if (player_check_pos + 10 <= player_pos_x)
 			{
 				ForwardRandomMap = "left";
-				ReloadMap(false);
+				ReloadMap(false, false, 0, 0);
 				flag2 = false;
 				holyWWar = false;
+				cicle++;
 			}
 		}
 		else
@@ -436,9 +447,10 @@ public class RandomMap : MonoBehaviour
 			else if (player_check_pos - 10 >= player_pos_x)
 			{
 				ForwardRandomMap = "right";
-				ReloadMap(true);
+				ReloadMap(true, false, 0, 0);
 				flag2 = true;
 				holyWWar = false;
+				cicle++;
 			}
 		}
 

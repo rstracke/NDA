@@ -8,6 +8,7 @@ public class BulletLaser : MonoBehaviour
 	private Rigidbody2D rb;
 	private Vector3 vector;
 	private float timer;
+	public float damage;
 	private void Start()
 	{
 		timer = 5;
@@ -37,7 +38,7 @@ public class BulletLaser : MonoBehaviour
 		if (collision.name == "Player")
 		{
 			Destroy(gameObject);
-			LocalPlayer.Singleton.player.GetComponent<PlayerInfo>().HP--;
+			LocalPlayer.Singleton.player.GetComponent<PlayerInfo>().HP -= damage;
 		}
 	}
 }
