@@ -390,26 +390,47 @@ public class RandomMap : MonoBehaviour
 
 	[Header("Генерация новой карты")]
 	public bool generateMap;
+	public float player_pos_x = 0;
+	public float player_check_pos = 0;
 	private void Update()
 	{
-        /*
-		if (Input.GetAxis("Horizontal") > 0)
+		/*
+		if (player_pos_x + 10 <  && ForwardRandomMap != "right")
 		{
-			if (ForwardRandomMap != "right")
-			{
-				ForwardRandomMap = "right";
-				ReloadMap(true);
-			}
+			ForwardRandomMap = "right";
+			ReloadMap(true);
 		}
-		if (Input.GetAxis("Horizontal") < 0)
+		if (ForwardRandomMap != "left")
 		{
-			if (ForwardRandomMap != "left")
+			ForwardRandomMap = "left";
+			ReloadMap(false);
+		}
+			*/
+		if (ForwardRandomMap == "right")
+		{
+			player_check_pos = player.transform.position.x;
+			if (player_check_pos > player_pos_x)
+				player_pos_x = player.transform.position.x;
+			else if (player_check_pos + 10 <= player_pos_x)
 			{
 				ForwardRandomMap = "left";
 				ReloadMap(false);
+				flag2 = false;
 			}
 		}
-		*/
+		else
+		{
+			player_check_pos = player.transform.position.x;
+			if (player_check_pos < player_pos_x)
+				player_pos_x = player.transform.position.x;
+			else if (player_check_pos - 10 >= player_pos_x)
+			{
+				ForwardRandomMap = "right";
+				ReloadMap(true);
+				flag2 = true;
+			}
+		}
+
 		ContinueMap(flag2);
 	}
 }

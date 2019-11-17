@@ -8,7 +8,7 @@ public class TradeRoom : MonoBehaviour
 	public int start_x, start_y;
 	private int x, y;
 	RandomMap randomMap;
-
+	/*
 	private void Start()
 	{
 		x = start_x;
@@ -63,4 +63,5 @@ public class TradeRoom : MonoBehaviour
 		GameObject obj = Instantiate(randomMap.oneWallRight, new Vector3(x, y + koof, 0), Quaternion.identity);
 		obj.transform.parent = trade.transform;
 	}
+	*/
 }
