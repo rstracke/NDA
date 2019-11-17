@@ -13,7 +13,7 @@ public class Hit : MonoBehaviour
         if (other.tag == "Hitting")
         {
             Debug.Log("Hitting");
-            hitParticles.Emit(20);
+            hitParticles.Emit(2);
         }
     }
 
@@ -28,7 +28,7 @@ public class Hit : MonoBehaviour
     {
         if (hit)
         {
-            hitParticles.Emit(10);
+            hitParticles.Emit(2);
             hit = false;
         }
     }
