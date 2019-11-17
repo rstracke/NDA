@@ -11,7 +11,10 @@ public class RandomEnemy : MonoBehaviour
 	public void SpawnEnemy(int x, int y)
 	{
 		if (Random.Range(0, 100) < enemyChance)
-			Instantiate(enemy[Random.Range(0, enemy.Length)], new Vector3(x, y + 1, 0), Quaternion.identity);
+		{
+			GameObject obj = Instantiate(enemy[Random.Range(0, enemy.Length)], new Vector3(x, y + 2, 0), Quaternion.identity);
+			obj.transform.parent = GetComponent<RandomMap>().globalEnemy.transform;
+		}
 	}
 
 	public void Apocalipsis(int x, int y)

@@ -7,6 +7,7 @@ public class RandomMap : MonoBehaviour
 	[Header("Иерархия")]
 	public GameObject globalBackground;
 	public GameObject globalStatic;
+	public GameObject globalEnemy;
 	public GameObject player;
 
 	[Header("Основные коллайдеры")]
@@ -345,16 +346,18 @@ public class RandomMap : MonoBehaviour
 	#endregion
 
 	#region Destroy AllMap
-	private void DestroyMap()
+	public void DestroyMap()
 	{
 		for (int i = 0; i < globalStatic.transform.childCount; i++)
 			Destroy(globalStatic.transform.GetChild(i).gameObject);
 		for (int i = 0; i < globalBackground.transform.childCount; i++)
 			Destroy(globalBackground.transform.GetChild(i).gameObject);
+		for (int i = 0; i < globalEnemy.transform.childCount; i++)
+			Destroy(globalEnemy.transform.GetChild(i).gameObject);
 	}
 	#endregion
 
-	private void ReloadMap(bool flag)
+	public void ReloadMap(bool flag)
 	{
 		flag2 = flag;
 		player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
@@ -399,6 +402,8 @@ public class RandomMap : MonoBehaviour
 	public bool holyWWar;
 	private void Update()
 	{
+		if (LocalPlayer.Singleton.Trader)
+			return;
 		TIMER += Time.deltaTime;
 		if (TIMER > 10)
 			holyWWar = true;
