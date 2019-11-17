@@ -23,6 +23,7 @@ public class RandomEnemy : MonoBehaviour
 				obj.GetComponent<EnemyFollow>().maxDamage *= cicle;
 				obj.GetComponent<EnemyFollow>().minPoints *= cicle;
 				obj.GetComponent<EnemyFollow>().maxPoints *= cicle;
+				obj.GetComponent<EnemyFollow>().delay *= cicle;
 
 					/*
 					 	public float speedMove = 30.0f;

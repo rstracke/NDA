@@ -152,8 +152,9 @@ MonoBehaviour:
   maxDamage: 10
   minPoints: 5
   maxPoints: 15
+  stat: 0
   delay: 0
-  newDelay: 1
+  newDelay: 0.5
   bullet: {fileID: 7179198237485410391, guid: 2bf6834d686ea4aefad5e1fb83c3c9c9, type: 3}
   target: 0
 --- !u!50 &8197925973146622395
