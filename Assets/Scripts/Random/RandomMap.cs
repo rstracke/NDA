@@ -166,7 +166,7 @@ public class RandomMap : MonoBehaviour
 				FillUnderFloor(1);
 			}
 			SpawnBackgroundRandom();
-			RandomLights();
+			RandomLights(flag);
 		}
 	}
 
@@ -288,10 +288,10 @@ public class RandomMap : MonoBehaviour
 		}
 	}
 
-	private void RandomLights()
+	private void RandomLights(bool flag)
 	{
 		if (GetComponent<RandomProps>())
-			GetComponent<RandomProps>().CreateLight(x, y + 3);
+			GetComponent<RandomProps>().CreateLight(x, y + 3, flag);
 	}
 
 	#endregion
