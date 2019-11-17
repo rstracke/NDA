@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets._2D;
 
 public class InteractableObject : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class InteractableObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = FindObjectOfType<PlatformerCharacter2D>().gameObject;
     }
 
     // Update is called once per frame
