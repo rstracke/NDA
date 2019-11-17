@@ -10,12 +10,17 @@ public class Magnet : MonoBehaviour
     public GameObject magnetableObject;
     public GameObject objectMagnetPoint;
     public GameObject myMagnetPoint;
+    private Rigidbody2D _Rigidbody2D;
+
+    public bool magneted;
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player" || other.tag == "Magnetable")
+        if (other.tag == "Magnetable")
         {
             objectMagnetPoint = other.transform.gameObject;
             magnetableObject = other.transform.parent.gameObject;
+            _Rigidbody2D = magnetableObject.GetComponent<Rigidbody2D>();
             isObjectInField = true;
         }
     }
@@ -38,19 +43,26 @@ public class Magnet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isObjectInField && magnetableObject)
+        if (!magneted)
         {
-            if (magnetableObject.tag == "Player")
+            if (isObjectInField && magnetableObject && objectMagnetPoint)
             {
-                //magnetableObject.GetComponent<PlatformerCharacter2D>().enabled = false;
-                //magnetableObject.GetComponent<Platformer2DUserControl>().enabled = false;
+                if (magnetableObject.tag == "Player")
+                {
+                    magnetableObject.GetComponent<PlatformerCharacter2D>().enabled = false;
+                    magnetableObject.GetComponent<Platformer2DUserControl>().enabled = false;
 
+                }
+                _Rigidbody2D.AddForce(20 * (myMagnetPoint.transform.position - objectMagnetPoint.transform.position));
+            }
+            if (Vector2.Distance(myMagnetPoint.transform.position, objectMagnetPoint.transform.position) < 0.05f)
+            {
+                _Rigidbody2D.simulated = false;
+                magnetableObject.transform.SetParent(transform);
+                magneted = true;
             }
 
-            magnetableObject.GetComponent<Rigidbody2D>().isKinematic = true;
-            magnetableObject.GetComponent<Rigidbody2D>().AddForce(10 * (myMagnetPoint.transform.position - objectMagnetPoint.transform.position));
+           
         }
-        if (Vector2.Distance(myMagnetPoint.transform.position, transform.position) < 0.1f)
-            magnetableObject.transform.SetParent(transform);
     }
 }
