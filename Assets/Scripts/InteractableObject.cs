@@ -6,7 +6,8 @@ using UnityEngine;
 public class InteractableObject : MonoBehaviour
 {
     public GameObject player;
-    public GameObject UI;
+
+    public bool uiShown;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,21 +20,27 @@ public class InteractableObject : MonoBehaviour
         
         if (Vector2.Distance(transform.position, player.transform.position) < 1.2f)
         {
-             UIController.Singleton.ShowInteractionTip(true);
-             if (Input.GetKeyDown(KeyCode.E))
-                UIController.Singleton.ShowInteractionWheel(true);
-             else if (Input.GetKeyUp(KeyCode.E))
-                UIController.Singleton.ShowInteractionWheel(false);
-  
+            if (!uiShown)
+                PlayerController.Singleton.OnPlayerNearInteractable_Action?.Invoke(true);
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                PlayerController.Singleton.OnPlayerInterraction_Action?.Invoke(true);
+                uiShown = true;
+            }
+            else if (Input.GetKeyUp(KeyCode.E))
+            {
+                PlayerController.Singleton.OnPlayerInterraction_Action?.Invoke(false);
+            }
+
         }
         else
         {
-            UIController.Singleton.ShowInteractionTip(false);
+            PlayerController.Singleton.OnPlayerNearInteractable_Action?.Invoke(false);
         }
     }
 
     private void OnDestroy()
     {
-        UIController.Singleton.ShowInteractionTip(false);
+        PlayerController.Singleton.OnPlayerNearInteractable_Action?.Invoke(false);
     }
 }

@@ -19,7 +19,8 @@ public class UIController : MonoBehaviour
         { 
             Destroy(gameObject);
         }
-        
+        PlayerController.Singleton.OnPlayerNearInteractable_Action += ShowInteractionTip;
+        PlayerController.Singleton.OnPlayerInterraction_Action += ShowInteractionWheel;
     }
 
     // Update is called once per frame

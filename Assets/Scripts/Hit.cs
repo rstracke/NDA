@@ -7,14 +7,14 @@ public class Hit : MonoBehaviour
     public ParticleSystem hitParticles;
     public bool hit;
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.collider.tag == "Hitting")
+        Debug.Log(other.tag);
+        if (other.tag == "Hitting")
         {
+            Debug.Log("Hitting");
             hitParticles.Emit(20);
         }
-
-        throw new System.NotImplementedException();
     }
 
     // Start is called before the first frame update
@@ -28,7 +28,7 @@ public class Hit : MonoBehaviour
     {
         if (hit)
         {
-            hitParticles.Emit(20);
+            hitParticles.Emit(10);
             hit = false;
         }
     }

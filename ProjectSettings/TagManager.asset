@@ -7,6 +7,8 @@ TagManager:
   - Fire
   - Hitting
   - Damagable
+  - Magnet
+  - Ground
   layers:
   - Default
   - TransparentFX
